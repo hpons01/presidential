@@ -125,10 +125,6 @@ export default function HomePage() {
                 <p className="text-sm leading-relaxed text-emerald-100/85">
                   {description}
                 </p>
-                <button className="inline-flex items-center gap-2 text-sm font-semibold text-emerald-200 transition hover:text-lime-200">
-                  En savoir plus
-                  <ArrowUpRight className="h-4 w-4" />
-                </button>
               </div>
             </article>
           ))}
