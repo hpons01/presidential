@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+:root {
+  color-scheme: dark;
+}
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background-color: rgb(2, 6, 23);
+    color: rgb(226, 232, 240);
+    font-family: var(--font-sans, "Inter", "Segoe UI", system-ui, sans-serif);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+}
+
+@layer utilities {
+  .glow-ring {
+    box-shadow: 0 0 60px rgba(59, 130, 246, 0.25);
+  }
+}
