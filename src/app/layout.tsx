@@ -8,6 +8,11 @@ export const metadata: Metadata = {
   title: "Votez l'Ane Cornu !",
   description:
     "Campagne officielle de l'Ane Cornu : humour d'ogre, marais parfumé et promesses croustillantes.",
+  icons: {
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
+  },
 };
 
 export default function RootLayout({
