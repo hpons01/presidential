@@ -1,36 +1,42 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Flag, Globe2, Leaf, ArrowUpRight } from "lucide-react";
+import { CircleDollarSign, HeartHandshake, Leaf, ArrowUpRight } from "lucide-react";
 import aneSite from "@/app/ane_site.png";
+import TestimonialCarousel from "@/components/TestimonialCarousel";
 
 const initiatives = [
   {
-    title: "Marais Propre",
-    description:
-      "Ramasser chaque botte de boue scintillante pour que le marais reflète le plus beau des couchers de soleil verdâtres.",
+    title: "Economie & emplois",
+    description: [
+      "Création de 10 000 emplois dans le cadre de la politique de nettoyage des bottes boueuses",
+      "Suppression de la taxe sur les oignons et la bière",
+    ],
     accent: "from-emerald-500/60 to-lime-400/25",
-    icon: Flag,
+    icon: CircleDollarSign,
   },
   {
-    title: "Alliance des Créatures",
+    title: "Vivre Ensemble",
     description:
-      "Réunir loups-garous, fées, dragons et ogres autour d'une grande tablée de ragoût aux oignons caramélisés.",
+      "Réunir le peuple et la noblesse autour d'une grande tablée de ragoût aux oignons caramélisées",
     accent: "from-green-500/60 to-teal-400/25",
-    icon: Globe2,
+    icon: HeartHandshake,
   },
   {
-    title: "Écosystème Boueux",
-    description:
-      "Créer des passerelles en rondins, protéger les champignons fluorescents et laisser pousser les algues musicales.",
+    title: "Ecologie & territoire",
+    // Render as an array so we can display bullets in the UI
+    description: [
+      "Installer des filtres à air près des maisons des ogres",
+      "Créer des passerelles pour protéger les champignons fluorescents",
+    ],
     accent: "from-lime-500/60 to-amber-300/25",
     icon: Leaf,
   },
 ];
 
 const highlights = [
-  { label: "Bottes de boue cirées", value: "12 408" },
-  { label: "Cri de ralliement d'ânes", value: "48" },
-  { label: "Couches d'oignon assumées", value: "7" },
+  { label: "Bottes boueuses nettoyées", value: "12 408" },
+  { label: "Evénements multiculturels organisés", value: "48" },
+  { label: "Hectares de champignons sauvés", value: "80" },
 ];
 
 export default function HomePage() {
@@ -45,7 +51,7 @@ export default function HomePage() {
               Ensemble, parfumons le royaume à l'oignon
             </h1>
             <p className="text-lg text-emerald-100/80">
-              Dans ce marais, chaque gargouillis compte. Soutenez une campagne qui défend les couches, les rots assumés et un humour ogresque sans filtre.
+              Sur le territoire, chaque gargouillis compte. Soutenez une campagne qui défend: le libre échange des produits de première nécessité, le port de bottes propres, la mixité sociale et l'écologie.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
@@ -58,19 +64,28 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="relative w-full max-w-lg overflow-hidden rounded-3xl border border-white/15 bg-white/10 backdrop-blur">
-            <Image
-              src={aneSite}
-              alt="Candidat ogre saluant depuis un marais"
-              width={900}
-              height={900}
-              className="h-full w-full object-cover"
-              priority
+          <div className="w-full max-w-lg">
+            <h2 className="mb-4 text-lg font-semibold text-emerald-100">Témoignagnes</h2>
+            <TestimonialCarousel
+              items={[
+                {
+                  image: '/shrek.png',
+                  text:
+                    '« Un leader doit sentir l\'oignon, sinon comment sentirait-il son peuple ? »',
+                  author: 'Ogre Anonyme',
+                },
+                {
+                  image: '/drake.png',
+                  text: '« L\'Ane Cornu, c\'est le candidat idéal pour notre situation. »',
+                  author: "Dragonne Amoureuse",
+                },
+                {
+                  image: '/epice.jpg',
+                  text: "« Avant, je vivais dans la peur. Maintenant, c'est pareil, mais j'ai un espoir. »",
+                  author: "Pain d'Epices soucieux",
+                },
+              ]}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-            <p className="absolute bottom-6 left-6 max-w-xs text-sm text-emerald-100/90">
-              « Un leader doit sentir l'oignon, sinon comment sentirait-il son peuple ? »
-            </p>
           </div>
         </div>
       </section>
@@ -94,19 +109,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="initiatives" className="mx-auto max-w-6xl px-6 pb-28">
-        <div className="mb-12 flex flex-col items-center gap-4 text-center">
-          <span className="text-sm font-semibold uppercase tracking-[0.3em] text-emerald-200">
-            Moments forts du marais
-          </span>
-          <h2 className="text-3xl font-bold text-white sm:text-4xl">
-            Gonflons la monture pour demain
-          </h2>
-          <p className="max-w-2xl text-base text-slate-300/80">
-            Chaque idée est une couche supplémentaire : plus on pèle, plus ça pique les yeux… et plus on rit. Découvrez comment l'Ane Cornu compte aromatiser la politique.
-          </p>
-        </div>
-
+      <section id="initiatives" className="mx-auto max-w-6xl px-6 pb-20">
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {initiatives.map(({ title, description, accent, icon: Icon }) => (
             <article
@@ -122,9 +125,15 @@ export default function HomePage() {
                   <Icon className="h-6 w-6 text-lime-200" />
                 </span>
                 <h3 className="text-xl font-semibold text-lime-100">{title}</h3>
-                <p className="text-sm leading-relaxed text-emerald-100/85">
-                  {description}
-                </p>
+                {Array.isArray(description) ? (
+                  <ul className="text-sm leading-relaxed text-emerald-100/85 list-disc pl-5 space-y-1">
+                    {description.map((line, idx) => (
+                      <li key={idx}>{line}</li>
+                    ))}
+                  </ul>
+                ) : (
+                  <p className="text-sm leading-relaxed text-emerald-100/85">{description}</p>
+                )}
               </div>
             </article>
           ))}
